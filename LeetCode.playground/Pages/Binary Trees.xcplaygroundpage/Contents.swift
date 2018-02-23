@@ -47,7 +47,7 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
     var minimum: BinarySearchTree {
         var _minimum = self
 
-        while let next = _minimum.left as? BinarySearchTree {
+        while let next = _minimum.bstLeft {
             _minimum = next
         }
 
@@ -56,7 +56,7 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
 
     var maximum: BinarySearchTree {
         var _maximum = self
-        while let next = _maximum.right as? BinarySearchTree {
+        while let next = _maximum.bstRight {
             _maximum = next
         }
         return _maximum
@@ -65,11 +65,11 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
     var previous: BinarySearchTree? {
         var _previous: BinarySearchTree? = nil
 
-        if let left = self.left as? BinarySearchTree {
+        if let left = self.bstLeft {
             _previous = left.maximum
         } else {
             var current = self
-            while let parent = current.parent as? BinarySearchTree {
+            while let parent = current.bstParent {
                 if parent.value < self.value {
                     _previous = parent
                 }
@@ -83,11 +83,11 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
     var next: BinarySearchTree? {
         var _next: BinarySearchTree? = nil
 
-        if let right = self.right as? BinarySearchTree {
+        if let right = self.bstRight {
             _next = right.minimum
         } else {
             var current = self
-            while let parent = current.parent as? BinarySearchTree {
+            while let parent = current.bstParent {
                 if parent.value > self.value {
                     _next = parent
                 }
@@ -100,9 +100,9 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
 
     func search(_ value: T) -> BinarySearchTree? {
         if value < self.value {
-            return (self.left as? BinarySearchTree)?.search(value)
+            return self.bstLeft?.search(value)
         } else if value > self.value {
-            return (self.right as? BinarySearchTree)?.search(value)
+            return self.bstRight?.search(value)
         } else {
             return self
         }
@@ -114,14 +114,14 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
 
     func insert(_ value: T) {
         if value < self.value {
-            if let left = self.left as? BinarySearchTree {
+            if let left = self.bstLeft {
                 left.insert(value)
             } else {
                 self.left = BinarySearchTree(value)
                 left?.parent = self
             }
         } else {
-            if let right = self.right as? BinarySearchTree {
+            if let right = self.bstRight {
                 right.insert(value)
             } else {
                 self.right = BinarySearchTree(value)
@@ -134,7 +134,7 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
     func remove() -> BinarySearchTree? {
         let replacement: BinarySearchTree?
 
-        if let right = self.right as? BinarySearchTree {
+        if let right = self.bstRight {
             replacement = right.minimum
         } else if let left = self.left as? BinarySearchTree {
             replacement = left.maximum
@@ -159,7 +159,7 @@ class BinarySearchTree<T: Comparable>: Tree<T> {
     }
 
     func reconnect(_ node: BinarySearchTree?) {
-        guard let parent = self.parent as? BinarySearchTree else { return }
+        guard let parent = self.bstParent else { return }
         if self.isLeftChild {
             parent.left = node
         } else {
@@ -252,6 +252,23 @@ class Tree<T> {
         self.right?.traversePostOrder(process: process)
         process(value)
     }
+
+
+}
+
+//MARK: CustomDebugStringConvertible conformance
+extension BinarySearchTree: CustomStringConvertible {
+    var description: String {
+        var output = String()
+        if let left = self.bstLeft {
+            output += "(\(left.description)) <- "
+        }
+        output += "\(value)"
+        if let right = self.bstRight {
+            output += " -> (\(right.description))"
+        }
+        return output
+    }
 }
 
 let bst = BinarySearchTree<Int>(0)
@@ -259,10 +276,11 @@ let someValues = [2,5,4,7,3,9,20,18,11,14]
 
 someValues.forEach { bst.insert($0) }
 
-var values = ""
+var values = String()
 bst.traverseInOrder { val in
     values += "\(val) "
 }
 print(values)
+print(bst)
 
 
