@@ -8,5 +8,7 @@
         <page name='License Key Formatting'/>
         <page name='Longest Univalue Path'/>
         <page name='Spiral Matrix'/>
+        <page name='Fibonacci'/>
+        <page name='Rod Cutting'/>
     </pages>
 </playground>

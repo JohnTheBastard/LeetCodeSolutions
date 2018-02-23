@@ -8,9 +8,9 @@ class Solution {
         let bCount = B.count
 
         let remainder = bCount % aCount
-        var reps = remainder == 0 ? bCount/aCount : 1 + (bCount-remainder)/aCount
+        let reps = remainder == 0 ? bCount/aCount : 1 + (bCount-remainder)/aCount
 
-        var repA = String(repeating: A, count: reps)
+        let repA = String(repeating: A, count: reps)
 
         let check: (String) -> Bool = {
             return $0.contains(B)
