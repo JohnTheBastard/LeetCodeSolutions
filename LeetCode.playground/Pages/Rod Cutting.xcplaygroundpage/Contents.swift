@@ -80,7 +80,7 @@ class Rod {
                 }
             } else {
 
-                let bestLength = segments[1...].map({$0[0]}).best.length
+                let bestLength = segments.dropFirst().map({$0[0]}).best.length
                 let (quotient,_,remainder) = ii %% bestLength
                 let cuts = Array(repeatElement(segments[bestLength][0], count: quotient))
                 max_ii = cuts<+>memo[remainder]

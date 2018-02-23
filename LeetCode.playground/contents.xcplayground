@@ -2,7 +2,7 @@
 <playground version='6.0' target-platform='ios' executeOnSourceChanges='false'>
     <pages>
         <page name='String Reversal'/>
-        <page name='Binary Tree'/>
+        <page name='Enum Tree'/>
         <page name='Repeated Substring'/>
         <page name='Next Closest Time'/>
         <page name='License Key Formatting'/>
@@ -10,5 +10,6 @@
         <page name='Spiral Matrix'/>
         <page name='Fibonacci'/>
         <page name='Rod Cutting'/>
+        <page name='Binary Trees'/>
     </pages>
 </playground>
