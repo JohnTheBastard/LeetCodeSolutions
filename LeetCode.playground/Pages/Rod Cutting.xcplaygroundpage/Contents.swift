@@ -10,7 +10,7 @@ extension Int {
     }
 }
 
-struct Segment: Equatable {//}: Comparable {
+struct Segment: Equatable {
     let length: Int
     let price: Int
     let normalizedValue: Float

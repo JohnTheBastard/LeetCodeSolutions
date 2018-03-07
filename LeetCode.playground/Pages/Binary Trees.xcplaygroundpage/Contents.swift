@@ -257,19 +257,19 @@ class Tree<T> {
 }
 
 //MARK: CustomDebugStringConvertible conformance
-extension BinarySearchTree: CustomStringConvertible {
-    var description: String {
-        var output = String()
-        if let left = self.bstLeft {
-            output += "(\(left.description)) <- "
-        }
-        output += "\(value)"
-        if let right = self.bstRight {
-            output += " -> (\(right.description))"
-        }
-        return output
-    }
-}
+//extension BinarySearchTree: CustomStringConvertible {
+//    var description: String {
+//        var output = String()
+//        if let left = self.bstLeft {
+//            output += "(\(left.description)) <- "
+//        }
+//        output += "\(value)"
+//        if let right = self.bstRight {
+//            output += " -> (\(right.description))"
+//        }
+//        return output
+//    }
+//}
 
 let bst = BinarySearchTree<Int>(0)
 let someValues = [2,5,4,7,3,9,20,18,11,14]
@@ -281,6 +281,6 @@ bst.traverseInOrder { val in
     values += "\(val) "
 }
 print(values)
-print(bst)
+//print(bst)
 
 
